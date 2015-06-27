@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Salesforce.Common;
 using Salesforce.Common.Models;
+using System.Collections.Generic;
 
 namespace Salesforce.Force
 {
@@ -160,6 +161,11 @@ namespace Salesforce.Force
         public Task<T> RecentAsync<T>(int limit = 200)
         {
             return _serviceHttpClient.HttpGetAsync<T>(string.Format("recent/?limit={0}", limit));
+        }
+
+        public Task<Dictionary<string, string>> ActionsCustom()
+        {
+            return _serviceHttpClient.HttpGetAsync<Dictionary<string, string>>("actions/custom");
         }
 
         public async Task<T> UserInfo<T>(string url)
